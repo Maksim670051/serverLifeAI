@@ -4,7 +4,8 @@ const UserSchema = new Schema({
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     isActivated: { type: Boolean, required: true, default: false },
-    balance: { type: Number, required: true, default: 0 }
+    balance: { type: Number, required: true, default: 0 },
+    ava: { type: String, default: '' }
 })
 
 module.exports = model('User', UserSchema)

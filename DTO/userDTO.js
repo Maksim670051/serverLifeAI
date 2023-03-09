@@ -5,6 +5,7 @@ module.exports = class UserDTO {
         this.email = userModel.email
         this.balance = userModel.balance
         this.isActivated = userModel.isActivated
+        this.ava = userModel.ava
     }
 
 }
