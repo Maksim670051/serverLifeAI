@@ -5,6 +5,7 @@ const UserDTO = require('./../DTO/userDTO')
 const ApiErrors = require('../exceptions/apiErrors')
 const ActivationLinkModel = require('../model/activationLinkModel')
 const BookmarkModel = require('../model/bookmarkModel')
+const RatingAIModel = require('../model/ratingAIModel')
 
 class UserService {
 
@@ -20,6 +21,7 @@ class UserService {
         const userDTO = new UserDTO(userModel)
         const activationLinkModel = await ActivationLinkModel.create({ userID: userDTO.userID, activationLink })
         await BookmarkModel.create({ userID: userDTO.userID, ai: [] })
+        await RatingAIModel.create({ userID: userDTO.userID, ratingAI: [] })
 
         return { userDTO, activationLink: activationLinkModel.activationLink }
     }

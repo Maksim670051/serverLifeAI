@@ -45,6 +45,42 @@ class AIController {
         }
     }
 
+    async setRating(req, res, next) {
+        try {
+            const { aiID, rating } = req.body
+            const userID = req.user.userID
+
+            const ratingUser = await AIService.getRatingAI(userID, aiID)
+            let newRating
+            if (!ratingUser) {
+                await AIService.setRatingAI(userID, aiID, rating)
+                await AIService.addCountRating(aiID)
+                newRating = await AIService.recalculateRating(aiID, rating)
+                return res.status(200).json({ newRating })
+            }
+            await AIService.updateRatingAI(userID, aiID, rating)
+            newRating = await AIService.recalculateRating(aiID, rating, ratingUser)
+
+            return res.status(200).json({ rating: newRating })
+        }
+        catch (err) {
+            next(err)
+        }
+    }
+
+    async getRatingAI(req, res, next) {
+        try {
+            const userID = req.user.userID
+
+            const ratingAI = await AIService.getRatingAIUser(userID)
+
+            return res.status(200).json({ ratingAI })
+        }
+        catch (err) {
+            next(err)
+        }
+    }
+
 }
 
 module.exports = new AIController()

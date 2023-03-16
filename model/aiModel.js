@@ -5,7 +5,8 @@ const AIShema = new Schema({
     developer: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    rating: { type: Number, default: 0 }
+    rating: { type: Number, default: 0 },
+    countRating: { type: Number, default: 0 }
 })
 
 module.exports = model('AI', AIShema)
