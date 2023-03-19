@@ -15,37 +15,7 @@ class AIController {
         }
     }
 
-    async createAI(req, res, rext) {
-        try {
-            const json = {
-                name: 'Преобразование текста в речь',
-                developer: 'Yandex Cloud',
-                description: 'Быстрое преобразование текста в аудио, поддержка более 100 языков и более 300 динамиков',
-                price: 0.27
-            }
-            await aiModel.create({ ...json })
-
-            return res.status(200).json({ status: 200 })
-        }
-        catch (err) {
-            next(err)
-        }
-    }
-
-    async findAI(req, res, next) {
-        try {
-            const listAI = req.body.listAI
-
-            const aiDTOList = await AIService.findAI(listAI)
-
-            return res.status(200).json({ ai: aiDTOList })
-        }
-        catch (err) {
-            next(err)
-        }
-    }
-
-    async setRating(req, res, next) {
+    async estimate(req, res, next) {
         try {
             const { aiID, rating } = req.body
             const userID = req.user.userID
@@ -75,6 +45,24 @@ class AIController {
             const ratingAI = await AIService.getRatingAIUser(userID)
 
             return res.status(200).json({ ratingAI })
+        }
+        catch (err) {
+            next(err)
+        }
+    }
+
+
+    async createAI(req, res, rext) {
+        try {
+            const json = {
+                name: 'Преобразование текста в речь',
+                developer: 'Yandex Cloud',
+                description: 'Быстрое преобразование текста в аудио, поддержка более 100 языков и более 300 динамиков',
+                price: 0.27
+            }
+            await aiModel.create({ ...json })
+
+            return res.status(200).json({ status: 200 })
         }
         catch (err) {
             next(err)

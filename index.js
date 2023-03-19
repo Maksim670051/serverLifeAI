@@ -24,7 +24,7 @@ const start = async () => {
         app.listen(process.env.PORT, process.env.HOST, () => console.log(`Server started http://${process.env.HOST}:${process.env.PORT}`))
     }
     catch (err) {
-        console.log('[inedx.js start()]: ', err)
+        console.log(err)
     }
 
 }

@@ -10,7 +10,7 @@ class BookmarkService {
 
         bookmarkDB.ai.push(aiID)
 
-        return bookmarkDB.save()
+        return await bookmarkDB.save()
     }
 
     async getBookmark(userID) {
@@ -26,7 +26,7 @@ class BookmarkService {
         if (aiIDDB !== -1)
             bookmarkDB.ai.splice(aiIDDB, 1)
 
-        return bookmarkDB.save()
+        return await bookmarkDB.save()
     }
 
 }
