@@ -21,8 +21,8 @@ router.get('/ai/rating', AuthMiddleware, AIController.getRatingAI)
 
 router.delete('/bookmark/:aiID', AuthMiddleware, BookmarkController.removeBookmark)
 
-
-router.post('/textGeneration', AuthMiddleware, BalanceMiddleware, RapidApiController.textGeneration)
+// RapidApi
+router.post('/searchChatBot', AuthMiddleware, BalanceMiddleware, RapidApiController.searchChatBot)
 
 router.get('/createAI', AIController.createAI)
 

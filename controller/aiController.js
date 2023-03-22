@@ -26,11 +26,10 @@ class AIController {
                 await AIService.setRatingAI(userID, aiID, rating)
                 await AIService.addCountRating(aiID)
                 newRating = await AIService.recalculateRating(aiID, rating)
-                return res.status(200).json({ newRating })
+                return res.status(200).json({ rating: newRating })
             }
             await AIService.updateRatingAI(userID, aiID, rating)
             newRating = await AIService.recalculateRating(aiID, rating, ratingUser)
-
             return res.status(200).json({ rating: newRating })
         }
         catch (err) {
@@ -58,7 +57,9 @@ class AIController {
                 name: 'Преобразование текста в речь',
                 developer: 'Yandex Cloud',
                 description: 'Быстрое преобразование текста в аудио, поддержка более 100 языков и более 300 динамиков',
-                price: 0.27
+                price: 0.27,
+                rating: 0,
+                countRating: 0
             }
             await aiModel.create({ ...json })
 

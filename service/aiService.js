@@ -19,15 +19,12 @@ class AIService {
         if (!ratingDB)
             return null
 
-        const fingRating = ratingDB.ratingAI.map((item) => {
-            if (item.aiID == aiID)
-                return item.rating
-        })
+        const fingRating = (ratingDB.ratingAI.find(item => item.aiID == aiID))?.rating
+        if (!fingRating)
+            return null
 
-        if (fingRating.length !== 0)
-            return fingRating[0]
+        return fingRating
 
-        return null
     }
 
     async setRatingAI(userID, aiID, rating) {
@@ -49,14 +46,14 @@ class AIService {
     }
 
     async addCountRating(aiID) {
-        const aiDB = await AIModel.findOne({ aiID })
+        const aiDB = await AIModel.findById(aiID)
 
         aiDB.countRating += 1
         await aiDB.save()
     }
 
     async recalculateRating(aiID, newRating, preRating = 0) {
-        const aiDB = await AIModel.findOne({ aiID })
+        const aiDB = await AIModel.findById(aiID)
 
         let rating
         if (preRating === 0)
